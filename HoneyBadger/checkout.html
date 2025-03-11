@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout: HoneyBadger</title>
+    <!-- materialize -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+
+    <!-- materialize icons -->
+    <link rel="stylesheet" href="styles/materializecssicons.css" />
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <!-- font awesome icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="styles/styles.css" />
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-DZDK7934TE"
+    ></script>
+    <script async src="gtag.js"></script>
+  </head>
+
+  <body>
+    <nav>
+      <div class="nav-wrapper">
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"
+          ><i class="material-icons">menu</i></a
+        >
+
+        <ul class="container center hide-on-med-and-down">
+          <li>
+            <a href="index.html">Home</a>
+          </li>
+          <li>
+            <a href="mobilePhones.html">Mobiles</a>
+          </li>
+          <li>
+            <a href="accessories.html">Accessories</a>
+          </li>
+        </ul>
+        <ul class="right">
+          <ul class="guides" style="border: none">
+            <li class="logged-in" style="display: none" ;>
+              <a
+                href="#"
+                class="modal-trigger tooltipped"
+                data-target="modal-account"
+                data-position="bottom"
+                data-tooltip="Account"
+              >
+                <i class="material-icons">account_circle</i>
+              </a>
+            </li>
+            <li class="logged-in" style="display: none" ;>
+              <a
+                href="#"
+                class="tooltipped"
+                id="logout"
+                data-position="bottom"
+                data-tooltip="Logout"
+              >
+                <i class="material-icons">logout</i>
+              </a>
+            </li>
+            <li class="logged-in" style="display: none" ;>
+              <a
+                href="#"
+                class="modal-trigger tooltipped"
+                data-target="modal-create"
+                id="cart"
+                data-position="bottom"
+                data-tooltip="Cart"
+              >
+                <i class="material-icons">shopping_cart</i>
+              </a>
+            </li>
+            <li class="logged-out" style="display: none" ;>
+              <a
+                href="#"
+                class="modal-trigger btn white black-text"
+                data-target="modal-login"
+                >Login</a
+              >
+            </li>
+            <!-- <li class="logged-out" style="display : none" ;>
+                    <a style="border: 1px solid white;" href="#" class="modal-trigger btn" data-target="modal-signup">Sign
+                        up</a>
+                </li> -->
+          </ul>
+        </ul>
+      </div>
+    </nav>
+    <ul class="sidenav center" id="mobile-demo">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="mobilePhones.html">Mobile</a></li>
+      <li><a href="accessories.html">Accessories</a></li>
+    </ul>
+    <main id="checkout-main">
+      <div id="modal-login" class="modal modal-fixed-footer">
+        <div class="modal-content signin-content">
+          <form id="login-form">
+            <h4 class="modal-heading">Login</h4>
+            <br />
+            <div class="input-field">
+              <input
+                type="email"
+                id="login-email"
+                autocomplete="off"
+                required
+              />
+              <label for="login-email">Email address</label>
+            </div>
+            <div class="input-field">
+              <input
+                type="password"
+                id="login-password"
+                autocomplete="off"
+                required
+              />
+              <label for="login-password">Your password</label>
+            </div>
+            <p>
+              <a
+                href="#"
+                class="blue-grey-text forget-pass"
+                onclick="forgetpass()"
+                >Forget Password?</a
+              >
+            </p>
+            <small class="signin-error center-align errors"></small>
+            <br />
+            <div
+              class="progress login-progress"
+              style="background: none !important; visibility: hidden"
+            >
+              <div class="indeterminate blue darken-3"></div>
+            </div>
+            <button class="btn z-depth-0 submit-btn">
+              <i class="material-icons">arrow_forward</i>
+            </button>
+            <p>
+              <a href="#" class="blue-grey-text forget-pass" onclick="newUser()"
+                >New User? Sign-up</a
+              >
+            </p>
+          </form>
+          <form class="reset-form" style="display: none">
+            <div class="forget-password-content">
+              <h6>We will send an email will password reset link.</h6>
+              <br />
+              <div class="input-field">
+                <input type="email" class="femail" />
+                <label for="forget-email">Email address</label>
+              </div>
+              <small class="errors forget-password-error"></small> <br />
+              <button href="" class="btn submit-btn">
+                <i class="material-icons">arrow_forward</i>
+              </button>
+            </div>
+            <h4 style="display: none" class="forget-password-success">
+              Email sent! Check your inbox
+            </h4>
+            <div>
+              <blockquote>
+                <a href="#" onclick="backToLogin()">back to Login</a>
+              </blockquote>
+            </div>
+          </form>
+        </div>
+
+        <!-- Sign up modal -->
+        <div class="modal-content signup-content" style="display: none">
+          <h4 class="modal-heading">Sign up</h4>
+          <br />
+          <form id="signup-form">
+            <div class="input-field">
+              <input
+                type="email"
+                id="signup-email"
+                autocomplete="off"
+                required
+              />
+              <label for="signup-email">Email address</label>
+              <small class="errors email-error"></small>
+            </div>
+            <div class="input-field">
+              <input type="password" id="signup-password" required />
+              <label for="signup-password">Choose password</label>
+              <small class="errors password-error"></small>
+            </div>
+            <div class="input-field">
+              <input type="password" id="signup-password-repeat" required />
+              <label for="signup-password-repeat">Repeat password</label>
+              <small class="errors password-error"></small>
+            </div>
+            <div class="input-field">
+              <input type="tel" id="signup-phone" required />
+              <label for="signup-phone">Phone</label>
+              <small class="errors password-error"></small>
+            </div>
+            <small class="signup-error center-align errors"></small>
+            <br />
+            <div
+              class="progress signup-progress"
+              style="background: none !important; visibility: hidden"
+            >
+              <div class="indeterminate blue darken-3"></div>
+            </div>
+            <button class="btn z-depth-0 submit-btn">
+              <i class="material-icons">arrow_forward</i>
+            </button>
+            <p>
+              <a href="#" class="blue-grey-text forget-pass" onclick="oldUser()"
+                >Already a User? Sign-in</a
+              >
+            </p>
+          </form>
+        </div>
+      </div>
+
+      <!-- account MODAL -->
+      <div id="modal-account" class="modal center-align">
+        <div class="modal-content center-align">
+          <h4 class="modal-heading">Account</h4>
+          <div class="row">
+            <p class="account-details"></p>
+            <a href="account.html">More</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- CHECKOUT CART MODAL -->
+      <div id="modal-cart" class="modal modal-fixed-footer">
+        <div class="modal-content">
+          <div class="show-cart" style="display: none">
+            <h6 class="modal-heading">Your Shopping Cart</h6>
+            <br />
+            <table class="centered">
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Name</th>
+                  <th>Remove</th>
+                  <th>Price</th>
+                </tr>
+              </thead>
+              <tbody class="cartWrapper"></tbody>
+              <tr class="bottom-table">
+                <td></td>
+                <td style="text-align: center">
+                  <h6>Total Price :</h6>
+                </td>
+                <td>
+                  <h6 class="total-price-count"></h6>
+                </td>
+                <td>
+                  <a href="checkout.html" class="btn-checkout btn z-depth-0"
+                    >Checkout</a
+                  >
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="hide-cart center" style="display: none">
+            <h5>Your Shopping Cart is Empty</h5>
+            <img src="img/empty-cart.jpg" alt="empty-cart" /> <br />
+            <a href="index.html" class="btn">Shop Now</a>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- here is the checkout form  -->
+    <div class="checkout-heading" style="text-align: center">
+      <h4 style="margin: 20px">Review Your Order & Complete Checkout</h4>
+    </div>
+    <hr />
+    <section id="checkout-section">
+      <!-- Your orders  -->
+      <div class="row">
+        <div class="col l4 m12 s12 checkout-cart-main">
+          <table class="centered">
+            <h5 style="text-align: center"><b>Your Order</b></h5>
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Name</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+            <tbody class="checkoutCart"></tbody>
+            <tr class="bottom-table" style="background-color: #dbdbdb">
+              <td></td>
+              <td style="text-align: center">
+                <h6>Shipping</h6>
+                <h6>Tax</h6>
+              </td>
+              <td>
+                <h6 class="">₹. 0</h6>
+                <h6 class="">₹. 0</h6>
+              </td>
+              <td></td>
+            </tr>
+            <tr class="bottom-table">
+              <td></td>
+              <td style="text-align: center">
+                <h6>Order Total</h6>
+              </td>
+              <td>
+                <h6 class="total-price-count-checkout"></h6>
+              </td>
+              <td></td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="col l7 m12 s12">
+          <div class="row">
+            <h5 style="text-align: center"><b>Billing Info</b></h5>
+            <div class="input-field col s6">
+              <input id="name" type="text" />
+              <label class="active" for="first_name2" autocomplete="off"
+                >Name</label
+              >
+            </div>
+            <div class="input-field col s6">
+              <input id="telephone" type="tel" />
+              <label for="icon_telephone">Telephone</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <textarea id="address" class="materialize-textarea"></textarea>
+              <label for="textarea1">Address</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="city" type="text" />
+              <label class="active" for="first_name2">City</label>
+            </div>
+
+            <div class="input-field col s6">
+              <input id="zip-code" type="number" />
+              <label for="icon_telephone">Zip Code</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="state" type="text" />
+              <label class="active" for="first_name2">State</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <div>
+                <p
+                  class="errors"
+                  id="checkout-form-errors"
+                  style="display: block"
+                ></p>
+              </div>
+              <br />
+              <button
+                class="btn btn-proceed-to-payment darken-1"
+                onclick="proceedPayment()"
+              >
+                Proceed To Payment
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- </main> -->
+    <footer class="page-footer">
+      <p>&copy; 2024 HoneyBadger. All rights reserved.</p>
+    </footer>
+    <!-- firebase configs -->
+    <!-- The core Firebase JS SDK is always requi  and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-app.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-firestore.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-auth.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+             https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-analytics.js"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyA7e9JlgkyNXHDdW29M3S_fqzO9OQ7eZdo",
+        authDomain: "honeybadgerdatabase.firebaseapp.com",
+        projectId: "honeybadgerdatabase",
+        storageBucket: "honeybadgerdatabase.firebasestorage.app",
+        messagingSenderId: "285947122454",
+        appId: "1:285947122454:web:f00d7e87257c0738b6f637",
+        measurementId: "G-PYC289M3BZ",
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+
+      //make firebase auth and reference
+      const auth = firebase.auth();
+      const db = firebase.firestore();
+
+      //firestore ssettings
+      // db.settings({ timestampsInSnapshots: true });
+    </script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var toolTip = document.querySelectorAll(".tooltipped");
+        var instances = M.Tooltip.init(toolTip);
+      });
+    </script>
+    <script src="js/auth.js"></script>
+    <script src="js/checkout.js"></script>
+  </body>
+</html>

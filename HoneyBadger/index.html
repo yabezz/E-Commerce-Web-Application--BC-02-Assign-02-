@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home: HoneyBadger</title>
+    <link type="text/css" rel="stylesheet" href="styles/sliderstyle.css" />
+    <link rel="icon" href="images/hero-elements/logo.png" />
+    <!-- materialize CSS -->
+    <link rel="stylesheet" href="styles/materialize.css" />
+
+    <link type="text/css" rel="stylesheet" href="styles/styles.css" />
+
+    <!-- material-icons -->
+    <link rel="stylesheet" href="styles/materializecssicons.css" />
+
+    <!-- Compiled and minified JavaScript for Animation on Scroll-->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- font awesome icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-DZDK7934TE"
+    ></script>
+    <script async src="gtag.js"></script>
+  </head>
+
+  <body>
+    <nav id="nav">
+      <div class="nav-wrapper">
+        <!-- <a href="index.html" class="brand-logo">HoneyBadger</a> -->
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"
+          ><i class="material-icons">menu</i></a
+        >
+        <ul class="container center hide-on-med-and-down">
+          <li>
+            <a href="index.html">Home</a>
+          </li>
+          <li>
+            <a href="mobilePhones.html">Mobiles</a>
+          </li>
+          <li>
+            <a href="accessories.html">Accessories</a>
+          </li>
+        </ul>
+        <ul class="right">
+          <ul class="guides" style="border: none">
+            <li class="logged-in" style="display: none" ;>
+              <a
+                href="#"
+                class="modal-trigger tooltipped"
+                data-target="modal-account"
+                data-position="bottom"
+                data-tooltip="Account"
+              >
+                <i class="material-icons">Your Profile</i>
+              </a>
+            </li>
+            <li class="logged-in" style="display: none" ;>
+              <a
+                href="#"
+                class="tooltipped"
+                id="logout"
+                data-position="bottom"
+                data-tooltip="Logout"
+              >
+                <i class="material-icons">logout</i>
+              </a>
+            </li>
+            <li class="logged-in" style="display: none" ;>
+              <a
+                href="#"
+                class="modal-trigger tooltipped"
+                data-target="modal-cart"
+                id="cart"
+                data-position="bottom"
+                data-tooltip="Cart"
+              >
+                <i class="material-icons">shopping_cart</i>
+              </a>
+            </li>
+            <li class="logged-out" style="display: none" ;>
+              <a
+                href="#"
+                class="modal-trigger btn black-text"
+                data-target="modal-login"
+                >Login</a
+              >
+            </li>
+          </ul>
+        </ul>
+      </div>
+    </nav>
+    <ul class="sidenav center" id="mobile-demo">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="mobilePhones.html">Mobile</a></li>
+      <li><a href="accessories.html">Accessories</a></li>
+    </ul>
+    <main id="main">
+      <div id="modal-login" class="modal modal-fixed-footer">
+        <div class="modal-content signin-content">
+          <form id="login-form">
+            <h4 class="modal-heading">Login</h4>
+            <br />
+            <div class="input-field">
+              <input
+                type="email"
+                id="login-email"
+                autocomplete="off"
+                required
+              />
+              <label for="login-email">Email address</label>
+            </div>
+            <div class="input-field">
+              <input
+                type="password"
+                id="login-password"
+                autocomplete="off"
+                required
+              />
+              <label for="login-password">Your password</label>
+            </div>
+            <p>
+              <a
+                href="#"
+                class="blue-grey-text forget-pass"
+                onclick="forgetpass()"
+                >Forget Password?</a
+              >
+            </p>
+            <small class="signin-error center-align errors"></small>
+            <br />
+            <div
+              class="progress login-progress"
+              style="background: none !important; visibility: hidden"
+            >
+              <div class="indeterminate blue darken-3"></div>
+            </div>
+            <button class="btn z-depth-0 submit-btn">
+              <i class="material-icons">arrow_forward</i>
+            </button>
+            <p>
+              <a href="#" class="blue-grey-text forget-pass" onclick="newUser()"
+                >New User? Sign-up</a
+              >
+            </p>
+          </form>
+          <form class="reset-form" style="display: none">
+            <div class="forget-password-content">
+              <h6>We will send an email will password reset link.</h6>
+              <br />
+              <div class="input-field">
+                <input type="email" class="femail" />
+                <label for="forget-email">Email address</label>
+              </div>
+              <small class="errors forget-password-error"></small> <br />
+              <button href="" class="btn submit-btn z-depth-0">
+                <i class="material-icons">arrow_forward</i>
+              </button>
+            </div>
+            <h4 style="display: none" class="forget-password-success">
+              Email sent! Check your inbox
+            </h4>
+            <div>
+              <blockquote>
+                <a href="#" onclick="backToLogin()">back to Login</a>
+              </blockquote>
+            </div>
+          </form>
+        </div>
+
+        <!-- Sign up modal -->
+        <div class="modal-content signup-content" style="display: none">
+          <h4 class="modal-heading">Sign up</h4>
+          <br />
+          <form id="signup-form">
+            <div class="input-field">
+              <input
+                type="email"
+                id="signup-email"
+                autocomplete="off"
+                required
+              />
+              <label for="signup-email">Email address</label>
+              <small class="errors email-error"></small>
+            </div>
+            <div class="input-field">
+              <input type="password" id="signup-password" required />
+              <label for="signup-password">Choose password</label>
+              <small class="errors password-error"></small>
+            </div>
+            <div class="input-field">
+              <input type="password" id="signup-password-repeat" required />
+              <label for="signup-password-repeat">Repeat password</label>
+              <small class="errors password-error"></small>
+            </div>
+            <div class="input-field">
+              <input type="tel" id="signup-phone" required />
+              <label for="signup-phone">Phone</label>
+              <small class="errors password-error"></small>
+            </div>
+            <small class="signup-error center-align errors"></small>
+            <br />
+            <div
+              class="progress signup-progress"
+              style="background: none !important; visibility: hidden"
+            >
+              <div class="indeterminate blue darken-3"></div>
+            </div>
+            <button class="btn z-depth-0 submit-btn">
+              <i class="material-icons">arrow_forward</i>
+            </button>
+            <p>
+              <a href="#" class="blue-grey-text forget-pass" onclick="oldUser()"
+                >Already a User? Sign-in</a
+              >
+            </p>
+          </form>
+        </div>
+      </div>
+
+      <div id="modal-account" class="modal center-align">
+        <div class="modal-content center-align">
+          <h4 class="modal-heading">Account</h4>
+          <div class="row">
+            <p class="account-details"></p>
+            <a href="account.html">More</a>
+          </div>
+        </div>
+      </div>
+
+      <div id="modal-cart" class="modal modal-fixed-footer">
+        <div class="modal-content">
+          <div class="show-cart" style="display: none">
+            <h6 class="modal-heading">Your Shopping Cart</h6>
+            <br />
+            <table class="centered">
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Name</th>
+                  <th>Remove</th>
+                  <th>Price</th>
+                </tr>
+              </thead>
+              <tbody class="cartWrapper"></tbody>
+              <tr class="bottom-table">
+                <td></td>
+                <td style="text-align: center">
+                  <h6>Total Price :</h6>
+                </td>
+                <td>
+                  <h6 class="total-price-count"></h6>
+                </td>
+                <td>
+                  <a href="checkout.html" class="btn-checkout btn z-depth-0"
+                    >Checkout</a
+                  >
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="hide-cart center" style="display: none">
+            <h5>Your Shopping Cart is Empty</h5>
+            <img src="img/empty-cart.jpg" alt="empty-cart" /> <br />
+            <a href="index.html" class="btn">Shop Now</a>
+          </div>
+        </div>
+      </div>
+      <section class="hero fade-in">
+        <h1>HoneyBadger, Unless You're New. Then, Welcome !</h1>
+        <p>Discover the latest trends and amazing deals.</p>
+        <a href="mobilePhones.html">Shop Now</a>
+      </section>
+    </main>
+    <section class="featured-products fade-in">
+      <h2>Featured Products</h2>
+      <div class="product-grid">
+        <div class="product fade-in">
+          <img src="images/featured/featured-1.png" alt="Product 1" />
+          <!-- <h3>Jewelleries</h3> -->
+          <p>$4000</p>
+        </div>
+        <div class="product fade-in">
+          <img src="images/featured/featured-2.png" alt="Product 2" />
+          <!-- <h3>Technology</h3> -->
+          <p>Free gifts on each purchase</p>
+        </div>
+        <div class="product fade-in">
+          <img src="images/featured/featured-3.png" alt="Product 3" />
+          <!-- <h3>Electronics</h3> -->
+          <p>$5000 Discount on purchases above $40k</p>
+        </div>
+        <div class="product fade-in">
+          <img src="images/featured/featured-4.png" alt="Product 4" />
+          <!-- <h3>Costumes</h3> -->
+          <p>Starting @ $500</p>
+        </div>
+      </div>
+    </section>
+    <hr />
+    <article id="article">
+      <div class="article-card">
+        <p>10+ years in Bussiness</p>
+      </div>
+      <div class="vertical"></div>
+      <div class="article-card">
+        <p>Cash On Delivery</p>
+      </div>
+      <div class="vertical"></div>
+      <div class="article-card">
+        <p>Quality Products</p>
+      </div>
+      <div class="vertical"></div>
+      <div class="article-card">
+        <p>Secure Payment</p>
+      </div>
+    </article>
+    <hr />
+    <section class="about fade-in">
+      <h2>What We Do</h2>
+      <p class="philosophy">
+        "Connecting you with the things you love, effortlessly."
+      </p>
+      <p>
+        At HoneyBadger, we curate a diverse selection of products to cater to
+        your unique needs and desires. We believe that shopping should be an
+        enjoyable and seamless experience, so we strive to provide a
+        user-friendly platform with clear product information, secure payment
+        options, and reliable delivery services. Our dedicated team is committed
+        to ensuring your satisfaction every step of the way.
+      </p>
+    </section>
+    <footer class="page-footer">
+      <p>&copy; 2024 HoneyBadger. All rights reserved.</p>
+    </footer>
+
+    <script>
+      AOS.init({});
+    </script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-app.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-firestore.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-functions.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-auth.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-analytics.js"></script>
+
+    <script>
+      var firebaseConfig = {
+        apiKey: "AIzaSyA7e9JlgkyNXHDdW29M3S_fqzO9OQ7eZdo",
+        authDomain: "honeybadgerdatabase.firebaseapp.com",
+        projectId: "honeybadgerdatabase",
+        storageBucket: "honeybadgerdatabase.firebasestorage.app",
+        messagingSenderId: "285947122454",
+        appId: "1:285947122454:web:f00d7e87257c0738b6f637",
+        measurementId: "G-PYC289M3BZ",
+      };
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+
+      const auth = firebase.auth();
+      const db = firebase.firestore();
+      const functions = firebase.functions();
+
+      console.log(firebase.analytics());
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const fadeElements = document.querySelectorAll(".fade-in");
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target); // Stop observing after fade-in
+            }
+          });
+        });
+
+        fadeElements.forEach((element) => {
+          observer.observe(element);
+        });
+      });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="js/auth.js"></script>
+  </body>
+</html>
